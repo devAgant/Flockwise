@@ -1,5 +1,5 @@
 
-import Feed from '@components/Feed';
+import MainMenu from '@components/MainMenu';
 
 const Home = () => {
   return (
@@ -9,7 +9,7 @@ const Home = () => {
                 <br className="max-md:hidden" />
                 <span> </span>
             </h1>
-            <Feed />
+            <MainMenu />
         </section>
   )
 }
