@@ -44,16 +44,6 @@ const Nav = () => {
             <ul>
               <li>
                 <Link
-                  href="/employment-history"
-                  className='dropdown_link'
-                >
-                  My Profile
-                </Link>
-              </li>
-            </ul>
-            <ul>
-              <li>
-                <Link
                   href="/task-manager"
                   className='dropdown_link'
                 >
@@ -104,7 +94,7 @@ const Nav = () => {
             <ul>
               <li>
                 <Link
-                  href="/manager-portal"
+                  href="/management-portal"
                   className='dropdown_link'
                 >
                   Management Portal
@@ -212,7 +202,7 @@ const Nav = () => {
                   HR Portal
                 </Link>
                 <Link
-                  href="/manager-portal"
+                  href="/management-portal"
                   className='dropdown_link'
                   onClick={() => setToggleDropdown
                     (false)}
