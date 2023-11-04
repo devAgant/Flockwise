@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.0",
     "bcrypt": "^5.1.1",
     "mongodb": "^6.2.0",
     "mongoose": "^8.0.0",
@@ -16,11 +17,12 @@
     "next-auth": "^4.24.4",
     "ngoose": "^1.1.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "styled-components": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
