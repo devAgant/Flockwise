@@ -40,66 +40,58 @@ const ViewTasks = () => {
     setSelectedTask(task);
   };
 
+  const containerStyles = {
+    display: 'flex',
+    width: '100%',
+  };
+  
   const taskListStyles = {
-    width: '250%', // Adjust the width for better readability
+    width: '40%',
     overflowY: 'scroll',
     border: '1px solid #ccc',
     padding: '10px',
-    background: '#f2f2f2', // Background color
-  };
-
-  const taskDetailsStyles = {
-    width: '100%', // Fixed width to prevent shifting
-    padding: '10px',
-    textAlign: 'left', // Align text to the left
+    background: '#f2f2f2',
+    margin: '0 10px 0 0', // Add margin to the right
   };
   
-
-  const containerStyles = {
-    display: 'flex',
-    justifyContent: 'space-between',
+  const taskDetailsStyles = {
+    width: '70%',
+    padding: '10px',
+    textAlign: 'left',
+    margin: '0 0 0 80px', // Add margin to the left to separate the list from the info
   };
-
-  const marginStyles = {
-    margin: '10px',
-  };
-
+  
   return (
     <div>
-      <h3>View Tasks</h3>
       <div style={containerStyles}>
-        <div>
-          <div style={taskListStyles}>
-            {tasks.map((task) => (
-              <div
-                key={task.id}
-                onClick={() => handleTaskClick(task)}
-                style={{ cursor: 'pointer', padding: '5px' }}
-              >
-                {task.title}
-              </div>
-            ))}
-          </div>
+        <div style={taskListStyles}>
+          {tasks.map((task) => (
+            <div
+              key={task.id}
+              onClick={() => handleTaskClick(task)}
+              style={{ cursor: 'pointer', padding: '5px' }}
+            >
+              {task.title}
+            </div>
+          ))}
         </div>
-        <div style={marginStyles}>
-          <div style={taskDetailsStyles}>
-            {selectedTask ? (
-              <div>
-                <h4>{selectedTask.title}</h4>
-                <p>
-                  <strong>Estimated Effort:</strong> {selectedTask.estimatedEffort}
-                </p>
-                <p>
-                  <strong>Due Date:</strong> {selectedTask.dueDate}
-                </p>
-                <p>
-                  <strong>Description:</strong> {selectedTask.description}
-                </p>
-              </div>
-            ) : (
-              <div>Select a task to view details</div>
-            )}
-          </div>
+        <div style={taskDetailsStyles}>
+          {selectedTask ? (
+            <div>
+              <h4>{selectedTask.title}</h4>
+              <p>
+                <strong>Estimated Effort:</strong> {selectedTask.estimatedEffort}
+              </p>
+              <p>
+                <strong>Due Date:</strong> {selectedTask.dueDate}
+              </p>
+              <p>
+                <strong>Description:</strong> {selectedTask.description}
+              </p>
+            </div>
+          ) : (
+            <div>Select a task to view details</div>
+          )}
         </div>
       </div>
     </div>
