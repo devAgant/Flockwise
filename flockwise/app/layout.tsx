@@ -1,3 +1,5 @@
+// File written by Arif Nizami
+
 import '@styles/globals.css';
 import Nav from '@components/Nav';
 import React, { ReactNode } from 'react';
