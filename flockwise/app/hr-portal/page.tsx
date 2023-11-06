@@ -1,9 +1,25 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react';
+import VerifyHR from './manager-check';
 
 const HrPortal = () => {
-  return (
-    <div>page</div>
-  )
-}
+  const taskManagerStyles = {
+    textAlign: 'center',
+    padding: '20px',
+  } as React.CSSProperties;
 
-export default HrPortal
+  const headingStyles = {
+    fontSize: '32px', 
+    marginBottom: '30px',
+  } as React.CSSProperties;
+
+  return (
+    <div style={taskManagerStyles}>
+      <h1 style={headingStyles}>HR Portal</h1>
+      <VerifyHR />
+    </div>
+  );
+};
+
+export default HrPortal;
