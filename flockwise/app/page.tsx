@@ -1,4 +1,4 @@
-
+// Project setup and this file written by Arif Nizami
 import MainMenu from '@components/MainMenu';
 
 const Home = () => {

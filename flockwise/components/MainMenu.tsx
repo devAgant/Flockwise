@@ -1,3 +1,4 @@
+// File written by Arif Nizami
 import React from 'react'
 
 const MainMenu = () => {

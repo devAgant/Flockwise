@@ -1,3 +1,4 @@
+// File written by Arif Nizami
 "use client";
 
 import { SessionProvider } from 'next-auth/react';

@@ -1,7 +1,9 @@
+// File written by Arif Nizami
 "use client";
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
@@ -15,8 +17,10 @@ const Nav = () => {
 
   const [providers, setProviders] = useState<{ [key: string]: any } | null>(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const { push } = useRouter();
 
   useEffect(() => {
+    push('/');
     const fetchProviders = async () => {
       const response = await getProviders();
 
@@ -25,8 +29,8 @@ const Nav = () => {
 
     fetchProviders();
   }, [])
-
   return (
+
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
@@ -101,10 +105,14 @@ const Nav = () => {
                 </Link>
               </li>
             </ul>
+              <button type="button" onClick={() => {
+                signOut();
+  
+              }} className="outline_btn">
+                Sign Out
+              </button>
 
-            <button type="button" onClick={() => signOut()} className="outline_btn">
-              Sign Out
-            </button>
+
 
             <Link href="/profile">
               <Image
@@ -209,15 +217,20 @@ const Nav = () => {
                 >
                   Management Portal
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setToggleDropdown(false);
-                    signOut();
-                  }}
-                  className="mt-5 w-full black_btn">
-                  Sign Out
-                </button>
+                <ul>
+              <li>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setToggleDropdown(false);
+                      signOut();
+                    }}
+                    className="mt-5 w-full black_btn">
+                    Sign Out
+                  </button>
+                </li>
+                </ul>
+                
               </div>
             )}
           </div>
