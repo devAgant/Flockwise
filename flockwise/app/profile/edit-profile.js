@@ -1,4 +1,4 @@
-// Made by Elijah Simmons
+// File written by Elijah Simmons
 
 import React, { useState } from 'react';
 

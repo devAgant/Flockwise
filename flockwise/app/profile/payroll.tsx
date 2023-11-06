@@ -1,4 +1,4 @@
-// Made by Elijah
+// File written by Elijah Simmons
 
 import React from 'react';
 

@@ -1,4 +1,5 @@
-//Made by Elijah Simmons
+// File written by Elijah Simmons
+
 "use client";
 
 import React, { useState } from 'react';
