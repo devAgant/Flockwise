@@ -36,7 +36,7 @@ https://nodejs.org/en
 <p>You may need to close and reopen VS Code, but the project should now be able to compile.</p>
 
 ### Creating a .env File<a name="env"></a>
-<p>You will need to create a new file inside of your project directory named .env (the file used to store security keys to access APIs). This is where you will paste the enviornment variables which you have been provided through some form of communication. Once this is done, build the project and test the sign in button to make sure that all the user authentication is working as intended.</p>
+<p>You will need to create a new file inside of your project directory (the LOWERCASE /flockwise directory) named .env (the file used to store security keys to access APIs). This is where you will paste the enviornment variables which you have been provided through some form of communication. Once this is done, build the project and test the sign in button to make sure that all the user authentication is working as intended.</p>
 
 ## Building The Website<a name="building"></a>
 <p>There are two ways to build the website. Note that these commands work best when executed inside the VS Code terminal. The first way is used to see a live updating website for development purposes. When you build using this command, the website will update with new changes everytime you save your code:</p>
