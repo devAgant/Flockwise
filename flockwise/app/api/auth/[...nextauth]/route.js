@@ -66,9 +66,10 @@ const createEmployeeForUser = async (user, profile) => {
     employeeID: generateUniqueEmployeeID(), // need to implement, just need stored max id value and increment
     name: profile.name,
     assignedTasks: [], // an employee wont have any tasks assigned initially
-    workSchedule: createDefaultWorkSchedule(), // need to implement
-    benefitsManager: createDefaultBenefitsManager(), // need to implement
-    accessLevel: 1,
+    workSchedule: [], // need to implement
+    benefitsManager: [], // empty list for now but possibly have default benefits
+    accessLevel: 1, // default access level is 1 for employee, 2 = manager, 3 = HR staff
+    salary: 7.25 // default salary is minimum wage
   });
   await newEmployee.save();
 
