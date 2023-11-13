@@ -74,10 +74,6 @@ const createEmployeeForUser = async (user, profile) => {
 
   user.employee = newEmployee._id;
   await user.save();
-
-  // update existing user with the newly created Employee object
-  existingUser.employee = newEmployee._id;
-  await existingUser.save();
 };
 
 export { handler as GET, handler as POST }
