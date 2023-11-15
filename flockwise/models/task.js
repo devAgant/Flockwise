@@ -27,6 +27,10 @@ const taskSchema = new Schema({
   plannedEffort: {
     type: Number,
     default: 1 // hours needed to complete
+  },
+  assignedTo: {
+    type: [Number], // array of employeeID's
+    default: []
   }
 });
 
