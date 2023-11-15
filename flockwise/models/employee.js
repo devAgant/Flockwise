@@ -1,7 +1,7 @@
 // Written by Evan
 
 import { Schema, model } from 'mongoose';
-import Task from './task'; // Import the Task model
+//import Task from './task'; // Import the Task model
 
 const employeeSchema = new Schema({
   employeeID: {
@@ -13,14 +13,14 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
-  assignedTasks: {
-    type: [Task.schema],
-    default: [],
-  },
-  workSchedule: {
-    type: Schema.Types.ObjectId, // make another object for work schedule or implement however desired
-    ref: 'WorkSchedule',
-  },
+  // assignedTasks: {
+  //   type: [Task.schema],
+  //   default: [],
+  // },
+  // workSchedule: {
+  //   type: Schema.Types.ObjectId, // make another object for work schedule or implement however desired
+  //   ref: 'WorkSchedule',
+  // },
   benefits: {
     type: Schema.Types.ObjectId, // make another object for benefits or implement however desired
     ref: 'BenefitsManagement',

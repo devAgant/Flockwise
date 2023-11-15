@@ -1,8 +1,9 @@
 // Written by Evan
 
 import { Schema, model } from 'mongoose';
+import Employee from './employee';
 
-const taskSchema = new Schema({
+const taskSchema = new Schema({  
   name: {
     type: String,
     required: true,
@@ -12,13 +13,21 @@ const taskSchema = new Schema({
     required: true,
   },
   taskCode: {
-    type: Number,
+    type: String,
     required: true,
   },
-  completed: {
+  state: {
+    type: Boolean,
+    default: false, // false = WIP, true = completed
+  },
+  billable: {
     type: Boolean,
     default: false,
   },
+  plannedEffort: {
+    type: Number,
+    default: 1 // hours needed to complete
+  }
 });
 
 const Task = model('Task', taskSchema);

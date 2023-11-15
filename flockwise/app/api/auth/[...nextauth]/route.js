@@ -41,15 +41,15 @@ const handler = NextAuth({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
+            employee: await createEmployeeForUser(newUser, profile) // create a corresponding employee for the user as well
           });
-          await createEmployeeForUser(newUser, profile); // create a corresponding employee for the user as well
         }
         else {
           const existingUser = await User.findOne({ email: profile.email }).populate('employee');
 
           // ensure user has an employee object, create one if not
           if (!existingUser.employee) {
-            const newEmployee = createEmployeeForUser(userExists, profile)
+            existingUser.employee = await createEmployeeForUser(existingUser, profile)
           }
         }
         return true
@@ -63,7 +63,7 @@ const handler = NextAuth({
 
 const createEmployeeForUser = async (user, profile) => {
   const newEmployee = new Employee({
-    employeeID: generateUniqueEmployeeID(), // need to implement, just need stored max id value and increment
+    employeeID: await generateUniqueEmployeeID(), // need to implement, just need stored max id value and increment
     name: profile.name,
     assignedTasks: [], // an employee wont have any tasks assigned initially
     workSchedule: [], // need to implement
@@ -76,5 +76,18 @@ const createEmployeeForUser = async (user, profile) => {
   user.employee = newEmployee._id;
   await user.save();
 };
+
+const generateUniqueEmployeeID = async () => {
+  // -1 for sorting in decending order, findone will return the first document, so returns the largest current employee ID
+  const lastEmployee = await Employee.findOne().sort({ employeeID: -1 }); 
+  if (lastEmployee) {
+    return lastEmployee.employeeID + 1;
+  } else {
+    // If no employees exist yet, start with an initial value
+    return 1000;
+  }
+};
+
+
 
 export { handler as GET, handler as POST }
