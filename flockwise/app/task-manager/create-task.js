@@ -1,11 +1,12 @@
 // Written by Evan
 import React, { useState } from 'react';
+import Task from '@models/task';
 
-const CreateTask = () => {
+const CreateTask = ({session}) => {
   const [task, setTask] = useState({
     title: '',
     estimatedEffort: '',
-    dueDate: '',
+    billableStatus: '',
     description: '',
   });
 
@@ -17,11 +18,31 @@ const CreateTask = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Mock: You can display the task data or send it to the server here.
-    console.log('New Task:', task);
-  };
+    let taskCode = await generateUniqueTaskCode();
+
+  if(session.user && session.user.employee && session.user.employee.accessLevel >= 2) {
+    try {
+      const newTask = await Task.create({
+        title: task.title,
+        taskCode: taskCode,
+        estimatedEffort: task.estimatedEffort,
+        description: task.description,
+        billable: task.billableStatus === 'true', // converts the string to a boolean
+      });
+
+      console.log('New Task:', newTask);
+
+    } 
+    catch (error) {
+      console.error('Error creating task: ', error.message)
+    }
+  }
+  else {
+    console.error('User does not have the required access level to create a task, must be a Manager or HR Staff')
+  }
+};
 
   const formStyles = {
     display: 'flex',
@@ -84,14 +105,17 @@ const CreateTask = () => {
           />
         </div>
         <div style={inputContainerStyles}>
-          <label style={labelStyles}>Due Date:</label>
-          <input
-            type="date"
-            name="dueDate"
-            value={task.dueDate}
+          <label style={labelStyles}>Billable Task:</label>
+          <select
+            name="billableStatus"
+            value={task.billableStatus}
             onChange={handleInputChange}
             style={inputStyles}
-          />
+          >
+            <option value="">Select</option>
+            <option value="true">Billable</option>
+            <option value="false">Non-billable</option>
+          </select>
         </div>
         <div style={inputContainerStyles}>
           <label style={labelStyles}>Description:</label>
@@ -106,6 +130,18 @@ const CreateTask = () => {
       </form>
     </div>
   );
+};
+
+// pretty much identical to generating a unique employee id
+const generateUniqueTaskCode = async () => {
+  const lastTask = await Task.findOne().sort({ taskCode: -1 });
+
+  if (lastTask) {
+    return lastTask.taskCode + 1;
+  } else {
+    // If no tasks exist yet, start with an initial value
+    return 100000;
+  }
 };
 
 export default CreateTask;
