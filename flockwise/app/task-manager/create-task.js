@@ -1,8 +1,22 @@
 // Written by Evan
-import React, { useState } from 'react';
-import Task from '@models/task';
 
-const CreateTask = ({session}) => {
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Task from '@models/task';
+import { useSession } from 'next-auth/react';
+import SessionManager from '@models/sessionManager';
+import NextAuth from 'next-auth/next';
+import { connectToDB } from '@utils/database';
+
+const CreateTask = () => {
+  const { data: session } = useSession();
+  console.log("in create task");
+
+  useEffect(() => {
+    SessionManager.setSession(session);
+  }, [session]);
+  
   const [task, setTask] = useState({
     title: '',
     estimatedEffort: '',
@@ -20,29 +34,28 @@ const CreateTask = ({session}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let taskCode = await generateUniqueTaskCode();
-
-  if(session.user && session.user.employee && session.user.employee.accessLevel >= 2) {
     try {
-      const newTask = await Task.create({
-        title: task.title,
-        taskCode: taskCode,
-        estimatedEffort: task.estimatedEffort,
-        description: task.description,
-        billable: task.billableStatus === 'true', // converts the string to a boolean
+      const response = await fetch('/api/task', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task),
       });
 
-      console.log('New Task:', newTask);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-    } 
-    catch (error) {
-      console.error('Error creating task: ', error.message)
+      const responseData = await response.json();
+      console.log('Task created:', responseData);
+      // Reset form or handle success (e.g., display success message, navigate to another page)
+      setTask({ title: '', description: '', dueDate: '' });
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error (e.g., display error message)
     }
-  }
-  else {
-    console.error('User does not have the required access level to create a task, must be a Manager or HR Staff')
-  }
-};
+  };
 
   const formStyles = {
     display: 'flex',
@@ -134,14 +147,14 @@ const CreateTask = ({session}) => {
 
 // pretty much identical to generating a unique employee id
 const generateUniqueTaskCode = async () => {
-  const lastTask = await Task.findOne().sort({ taskCode: -1 });
-
-  if (lastTask) {
-    return lastTask.taskCode + 1;
-  } else {
-    // If no tasks exist yet, start with an initial value
-    return 100000;
-  }
-};
+    // -1 for sorting in decending order, findone will return the first document, so returns the largest current employee ID
+    const lastTask = await Task.findOne().sort({ taskCode: -1 }); 
+    if (lastTask) {
+      return lastTask.taskCode + 1;
+    } else {
+      // If no employees exist yet, start with an initial value
+      return 100000;
+    }
+  };
 
 export default CreateTask;

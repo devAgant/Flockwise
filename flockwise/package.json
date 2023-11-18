@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "aws4": "^1.12.0",
     "bcrypt": "^5.1.1",
     "mongodb": "^6.2.0",
-    "mongoose": "^8.0.0",
+    "mongoose": "^8.0.1",
     "next": "^14.0.1",
     "next-auth": "^4.24.4",
     "ngoose": "^1.1.1",

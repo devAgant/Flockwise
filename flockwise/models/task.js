@@ -1,8 +1,6 @@
-// Written by Evan
+import { Schema, model, models } from 'mongoose';
 
-import { Schema, model } from 'mongoose';
-
-const taskSchema = new Schema({  
+const TaskSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -21,14 +19,14 @@ const taskSchema = new Schema({
   },
   estimatedEffort: {
     type: Number,
-    default: 1 // hours needed to complete
+    default: 1, // hours needed to complete
   },
   assignedTo: {
     type: [Number], // array of employeeID's
-    default: []
-  }
+    default: [],
+  },
 });
 
-const Task = model('Task', taskSchema);
+const Task = models.Task || model("Task", TaskSchema);
 
 export default Task;
