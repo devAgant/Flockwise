@@ -11,7 +11,6 @@ import { connectToDB } from '@utils/database';
 
 const CreateTask = () => {
   const { data: session } = useSession();
-  console.log("in create task");
 
   useEffect(() => {
     SessionManager.setSession(session);
@@ -35,7 +34,7 @@ const CreateTask = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/task', {
+      const response = await fetch('/api/taskRoute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +49,7 @@ const CreateTask = () => {
       const responseData = await response.json();
       console.log('Task created:', responseData);
       // Reset form or handle success (e.g., display success message, navigate to another page)
-      setTask({ title: '', description: '', dueDate: '' });
+      setTask({ title: '', estimatedEffort: '', billableStatus: '', description: '' });
     } catch (error) {
       console.error('Error:', error);
       // Handle error (e.g., display error message)
@@ -144,17 +143,5 @@ const CreateTask = () => {
     </div>
   );
 };
-
-// pretty much identical to generating a unique employee id
-const generateUniqueTaskCode = async () => {
-    // -1 for sorting in decending order, findone will return the first document, so returns the largest current employee ID
-    const lastTask = await Task.findOne().sort({ taskCode: -1 }); 
-    if (lastTask) {
-      return lastTask.taskCode + 1;
-    } else {
-      // If no employees exist yet, start with an initial value
-      return 100000;
-    }
-  };
 
 export default CreateTask;

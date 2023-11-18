@@ -13,8 +13,6 @@ const TaskManager = () => {
   const { data: session } = useSession();
   const [activeComponent, setActiveComponent] = useState<null | string>(null);
 
-  console.log("in task manager");
-
   const taskManagerStyles = {
     textAlign: 'center',
     padding: '20px',
@@ -41,7 +39,6 @@ const TaskManager = () => {
 
   const handleCreateTaskClick = () => {
     setActiveComponent('createTask');
-    console.log("yoo")
   };
 
   const handleAssignTaskClick = () => {

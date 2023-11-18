@@ -1,4 +1,7 @@
-import { Schema, model, models } from 'mongoose';
+
+// Written by Evan and Arif
+import mongoose from 'mongoose';
+const { Schema, model, models } = mongoose;
 
 const TaskSchema = new Schema({
   title: {
@@ -27,6 +30,11 @@ const TaskSchema = new Schema({
   },
 });
 
-const Task = models.Task || model("Task", TaskSchema);
+let Task;
+try {
+  Task = mongoose.model('Task');
+} catch (error) {
+  Task = mongoose.model('Task', TaskSchema);
+}
 
 export default Task;

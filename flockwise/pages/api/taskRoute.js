@@ -1,19 +1,20 @@
-// pages/api/task.js
+// pages/api/taskRoute.js
+// Written by Evan and Arif
 import { connectToDB } from '@utils/database';
 import Task from '@models/task'; // Your Task model
 
 export default async function handler(req, res) {
-    console.log("initiating task request")
   if (req.method === 'POST') {
     try {
+
+
       await connectToDB(); // Ensure the database is connected
 
-      //let nextTaskCode = await generateUniqueTaskCode();
-      //const taskData = { ...req.body, nextTaskCode }; // Combine the generated task code with the request body
-
-      //const task = await Task.create(taskData); // Create a new task with the request body data
-      //res.status(201).json({ success: true, task });
-      res.status(200).json({ message: 'success' });
+      let taskCode = await generateUniqueTaskCode();
+      const taskData = { ...req.body, taskCode }; // Combine the generated task code with the request body
+      const task = await Task.create(taskData); // Create a new task with the request body data
+      res.status(201).json({ success: true, task });
+      // res.status(200).json({ message: 'success' });
     } catch (error) {
       res.status(400).json({ success: false, error: error.message });
       console.error(error);
