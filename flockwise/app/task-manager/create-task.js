@@ -8,6 +8,8 @@ import { useSession } from 'next-auth/react';
 import SessionManager from '@models/sessionManager';
 import NextAuth from 'next-auth/next';
 import { connectToDB } from '@utils/database';
+import sessionManager from '@models/sessionManager';
+import Notification from '@app/Notification';
 
 const CreateTask = () => {
   const { data: session } = useSession();
@@ -23,6 +25,12 @@ const CreateTask = () => {
     description: '',
   });
 
+  const [notification, setNotification] = useState(null);
+
+  const handleCloseNotification = () => {
+    setNotification(null);
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTask({
@@ -34,24 +42,40 @@ const CreateTask = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/taskRoute', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      });
+      const accessLevel = session?.user?.employee?.accessLevel;
+      if (accessLevel >= 2) {
+        const response = await fetch('/api/taskRoute', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(task),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+  
+        const responseData = await response.json();
+        console.log('Task created:', responseData);
+        // Reset form or handle success (e.g., display success message, navigate to another page)
+        setNotification({
+          message: `Task created successfully!`,
+          isError: false,
+        });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+        setTask({ title: '', estimatedEffort: '', billableStatus: '', description: '' });
+      } else {
+        setNotification({
+          message: 'You do not have the required access to create a task.',
+          isError: true,
+        });
       }
-
-      const responseData = await response.json();
-      console.log('Task created:', responseData);
-      // Reset form or handle success (e.g., display success message, navigate to another page)
-      setTask({ title: '', estimatedEffort: '', billableStatus: '', description: '' });
     } catch (error) {
-      console.error('Error:', error);
+      setNotification({
+        message: 'Error creating task. Please try again.',
+        isError: true,
+      });
       // Handle error (e.g., display error message)
     }
   };
@@ -91,7 +115,6 @@ const CreateTask = () => {
     fontSize: '16px',
     marginTop: '30px'
   };
-  
 
   return (
     <div>
@@ -140,6 +163,13 @@ const CreateTask = () => {
         </div>
         <button type="submit" style={buttonStyles}>Create New Task</button>
       </form>
+      {notification && (
+        <Notification
+          message={notification.message}
+          isError={notification.isError}
+          onClose={handleCloseNotification}
+        />
+      )}
     </div>
   );
 };

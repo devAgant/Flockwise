@@ -6,8 +6,6 @@ import Task from '@models/task'; // Your Task model
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-
-
       await connectToDB(); // Ensure the database is connected
 
       let taskCode = await generateUniqueTaskCode();

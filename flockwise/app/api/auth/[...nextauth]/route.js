@@ -81,7 +81,9 @@ const generateUniqueEmployeeID = async () => {
   // -1 for sorting in decending order, findone will return the first document, so returns the largest current employee ID
   const lastEmployee = await Employee.findOne().sort({ employeeID: -1 }); 
   if (lastEmployee) {
-    return lastEmployee.employeeID + 1;
+    parseInt(lastEmployee.employeeID, 10); // IDs are strings so have to parse to get the next one
+    lastEmployee.employeeID += 1;
+    return lastEmployee.employeeID.toString();
   } else {
     // If no employees exist yet, start with an initial value
     return 1000;
