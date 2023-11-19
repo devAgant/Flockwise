@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 const ClockIn = () => {
     const [shift, setShift] = useState({
         clockInTime: '',
-        clockInDate: '',
         clockOutTime: '',
-        clockOutDate: '',
     });
 
     const buttonStyles = {

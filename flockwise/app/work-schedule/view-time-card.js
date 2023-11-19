@@ -14,24 +14,18 @@ const ViewTimeCard = () => {
 
     const shifts = [
         {
-            clockInDate: "11/2/2023",
-            clockInTime: "9:05 AM",
-            clockOutDate: "11/2/2023",
-            clockOutTime: "3:23 PM",
+            clockIn: "11/2/2023, 9:05 AM",
+            clockOut: "11/2/2023, 3:23 PM",
             id: 1,
         },
         {
-            clockInDate: "11/3/2023",
-            clockInTime: "11:30 AM",
-            clockOutDate: "11/3/2023",
-            clockOutTime: "4:15 PM",
+            clockIn: "11/3/2023, 11:30 AM",
+            clockOut: "11/3/2023, 4:15 PM",
             id: 2,
         },
         {
-            clockInDate: "11/4/2023",
-            clockInTime: "12:52 PM",
-            clockOutDate: "11/4/2023",
-            clockOutTime: "5:35 PM",
+            clockIn: "11/4/2023, 12:52 PM",
+            clockOut: "11/4/2023, 5:35 PM",
             id: 3,
         },
     ];
@@ -85,7 +79,7 @@ const ViewTimeCard = () => {
                             onClick={() => handleShiftClick(shift)}
                             style={{ cursor: 'pointer', padding: '5px' }}
                         >
-                            {shift.clockInDate}
+                            {shift.clockIn}
                         </div>
                     ))}
                 </div>
@@ -93,16 +87,10 @@ const ViewTimeCard = () => {
                     {selectedShift ? (
                         <div>
                             <p>
-                                <b>Clock In Date:</b> {selectedShift.clockInDate}
+                                <b>Clock In Time:</b> {selectedShift.clockIn}
                             </p>
                             <p>
-                                <b>Clock In Time:</b> {selectedShift.clockInTime}
-                            </p>
-                            <p>
-                                <b>Clock Out Date:</b> {selectedShift.clockOutDate}
-                            </p>
-                            <p>
-                                <b>Clock Out Time:</b> {selectedShift.clockOutTime}
+                                <b>Clock Out Time:</b> {selectedShift.clockOut}
                             </p>
                             <button type="submit" style={buttonStyles} onClick={handleEditClick}>Request Edit</button>
                             {activeComponent === 'requestEdit' && <RequestEdit />}
