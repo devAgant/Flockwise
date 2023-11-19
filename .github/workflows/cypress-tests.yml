@@ -1,0 +1,26 @@
+name: Run Cypress Tests on PR
+
+on:
+  pull_request:
+    branches: [ master ] # Make sure this matches your repository's default branch
+
+jobs:
+  cypress-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14' # Specify the Node.js version to match your project
+
+    - name: Install Dependencies
+      run: npm install
+      working-directory: ./flockwise
+
+    - name: Run Cypress Tests
+      run: npm run ci:cy-run
+      working-directory: ./flockwise
