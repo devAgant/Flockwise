@@ -1,10 +1,10 @@
-// In your Cypress test file
-import Provider from './Provider';
-import Nav from './Nav';
-import '../styles/globals.css';
+// Arif Nizami Test Case: Check if Nav var is correctly displayed to a signed in user
+import Provider from '../../components/Provider';
+import Nav from '../../components/Nav';
+import '../../styles/globals.css';
 
 describe('<Nav />', () => {
-  it('renders with session', () => {
+  it('Renders with a navigation bar when a user is signed in', () => {
     // Set up a mock session object
     const mockSession = {
       user: {

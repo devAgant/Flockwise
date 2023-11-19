@@ -8,5 +8,6 @@ export default defineConfig({
     },
     viewportWidth: 1280,
     viewportHeight: 720,
+    specPattern: "cypress/tests/**/*.cy.{js,jsx,ts,tsx}",
   },
 });
