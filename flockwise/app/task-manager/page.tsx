@@ -2,12 +2,15 @@
 "use client";
 
 import React, { useState } from 'react';
+import { Session } from 'next-auth';
 import AssignTask from './assign-task';
 import CreateTask from './create-task';
 import ViewTasks from './view-tasks';
+import { useSession } from 'next-auth/react';
 
 
 const TaskManager = () => {
+  const { data: session } = useSession();
   const [activeComponent, setActiveComponent] = useState<null | string>(null);
 
   const taskManagerStyles = {

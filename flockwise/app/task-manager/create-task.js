@@ -1,11 +1,25 @@
 // Written by Evan
-import React, { useState } from 'react';
+
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Task from '@models/task';
+import { useSession } from 'next-auth/react';
+import SessionManager from '@models/sessionManager';
+import NextAuth from 'next-auth/next';
+import { connectToDB } from '@utils/database';
 
 const CreateTask = () => {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    SessionManager.setSession(session);
+  }, [session]);
+  
   const [task, setTask] = useState({
     title: '',
     estimatedEffort: '',
-    dueDate: '',
+    billableStatus: '',
     description: '',
   });
 
@@ -17,10 +31,29 @@ const CreateTask = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Mock: You can display the task data or send it to the server here.
-    console.log('New Task:', task);
+    try {
+      const response = await fetch('/api/taskRoute', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      console.log('Task created:', responseData);
+      // Reset form or handle success (e.g., display success message, navigate to another page)
+      setTask({ title: '', estimatedEffort: '', billableStatus: '', description: '' });
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error (e.g., display error message)
+    }
   };
 
   const formStyles = {
@@ -84,14 +117,17 @@ const CreateTask = () => {
           />
         </div>
         <div style={inputContainerStyles}>
-          <label style={labelStyles}>Due Date:</label>
-          <input
-            type="date"
-            name="dueDate"
-            value={task.dueDate}
+          <label style={labelStyles}>Billable Task:</label>
+          <select
+            name="billableStatus"
+            value={task.billableStatus}
             onChange={handleInputChange}
             style={inputStyles}
-          />
+          >
+            <option value="">Select</option>
+            <option value="true">Billable</option>
+            <option value="false">Non-billable</option>
+          </select>
         </div>
         <div style={inputContainerStyles}>
           <label style={labelStyles}>Description:</label>

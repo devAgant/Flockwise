@@ -1,10 +1,10 @@
-// Written by Evan
 
-import { Schema, model } from 'mongoose';
-import Employee from './employee';
+// Written by Evan and Arif
+import mongoose from 'mongoose';
+const { Schema, model, models } = mongoose;
 
-const taskSchema = new Schema({  
-  name: {
+const TaskSchema = new Schema({
+  title: {
     type: String,
     required: true,
   },
@@ -13,27 +13,28 @@ const taskSchema = new Schema({
     required: true,
   },
   taskCode: {
-    type: String,
+    type: Number,
     required: true,
-  },
-  state: {
-    type: Boolean,
-    default: false, // false = WIP, true = completed
   },
   billable: {
     type: Boolean,
     default: false,
   },
-  plannedEffort: {
+  estimatedEffort: {
     type: Number,
-    default: 1 // hours needed to complete
+    default: 1, // hours needed to complete
   },
   assignedTo: {
     type: [Number], // array of employeeID's
-    default: []
-  }
+    default: [],
+  },
 });
 
-const Task = model('Task', taskSchema);
+let Task;
+try {
+  Task = mongoose.model('Task');
+} catch (error) {
+  Task = mongoose.model('Task', TaskSchema);
+}
 
 export default Task;
