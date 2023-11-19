@@ -32,6 +32,7 @@ https://nodejs.org/en
 `$ npm install mongodb`
 `$ npm install mongoose`
 `$ npm install next-auth`
+`$ npm install aws4`
 
 <p>You may need to close and reopen VS Code, but the project should now be able to compile.</p>
 
@@ -39,7 +40,7 @@ https://nodejs.org/en
 <p>You will need to create a new file inside of your project directory (the LOWERCASE /flockwise directory) named .env (the file used to store security keys to access APIs). This is where you will paste the enviornment variables which you have been provided through some form of communication. Once this is done, build the project and test the sign in button to make sure that all the user authentication is working as intended.</p>
 
 ## Building The Website<a name="building"></a>
-<p>There are two ways to build the website. Note that these commands work best when executed inside the VS Code terminal. The first way is used to see a live updating website for development purposes. When you build using this command, the website will update with new changes everytime you save your code:</p>
+<p>There are two ways to build the website. Note that these commands work best when executed inside the VS Code terminal in the LOWERCASE flockwise directory. The first way is used to see a live updating website for development purposes. When you build using this command, the website will update with new changes everytime you save your code:</p>
 
 `$ npm run dev`
 
