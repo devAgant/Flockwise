@@ -1,4 +1,4 @@
-// Arif Nizami Test Case: Check if Nav var is correctly displayed to a signed in user
+// Test case written by Arif Nizami
 import Provider from '../../components/Provider';
 import Nav from '../../components/Nav';
 import '../../styles/globals.css';
