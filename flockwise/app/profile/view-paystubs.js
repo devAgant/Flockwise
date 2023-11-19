@@ -73,6 +73,11 @@ const ViewPayStubs = () => {
       <h2 className="text-xl font-bold mb-2">Paystubs</h2>
       <div className="max-h-60 overflow-y-auto border rounded border-gray-300 p-4 mb-5">
         <ul className="divide-y">
+          {paystubs.length === 0 && ( 
+            <div className="text-center">
+              <p className="text-gray-600 mb-4">No paystubs available</p>
+            </div>
+          )}
           {paystubs.map((paystub, index) => (
             <div
               key={index}
@@ -101,14 +106,11 @@ const ViewPayStubs = () => {
               Export
             </button>
           </div>
-          <p><strong>Employee Name:</strong> John Doe</p>
-          <p><strong>Employee ID:</strong> 12345</p>
-          <p><strong>Pay Period:</strong> Month 2023</p>
-          <p><strong>Hours Worked:</strong> 160</p>
-          <p><strong>Hourly Rate:</strong> $30.00</p>
-          <p><strong>Gross Pay:</strong> $4800.00</p>
-          <p><strong>Deductions:</strong> $800.00</p>
-          <p><strong>Net Pay:</strong> $4000.00</p>
+          <p><strong>Employee ID:</strong> {paystubs[selectedPaystub].employeeID}</p>
+          <p><strong>Date:</strong> {paystubs[selectedPaystub].date}</p>
+          <p><strong>Hours Worked:</strong> {paystubs[selectedPaystub].hoursWorked}</p>
+          <p><strong>Hourly Rate:</strong> {paystubs[selectedPaystub].salary}</p>
+          <p><strong>Total Pay:</strong> {paystubs[selectedPaystub].amount}</p>
         </div>
       )}
     </div>
