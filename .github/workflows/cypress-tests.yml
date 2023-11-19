@@ -1,8 +1,6 @@
 name: Run Cypress Tests on PR
 
-on:
-  pull_request:
-    branches: [ master ] # Make sure this matches your repository's default branch
+on: pull_request # This will trigger the action on any pull request to any branch
 
 jobs:
   cypress-test:
