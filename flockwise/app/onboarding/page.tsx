@@ -1,9 +1,9 @@
  // Viraaj Veeramachaneni's Code
  "use client";
-import React, { useState } from 'react';
+ import React, { useState, CSSProperties } from 'react';
 import CompanyPolicies from './CompanyPolicies'; // Import CompanyPolicies component
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
   app: {
     textAlign: 'center',
   },
@@ -39,7 +39,7 @@ const styles = {
 function OnboardingPage() {
   const [currentStep, setCurrentStep] = useState('');
 
-  const handleStartClick = (step) => {
+  const handleStartClick = (step: string) => {
     setCurrentStep(step);
   };
 

@@ -1,12 +1,12 @@
 // Viraaj Veeramachaneni's Code
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, CSSProperties } from 'react';
 import NewEmployee from './NewEmployee';
 import CurrentEmployee from './CurrentEmployee';
 import Retirees from './Retirees';
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
   app: {
     textAlign: 'center',
   },

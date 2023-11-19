@@ -14,7 +14,11 @@ const UserSchema = new Schema({
   },
   image: {
     type: String,
-  }
+  },
+  employee: {
+    type: Schema.Types.ObjectId,
+    ref: 'Employee',
+  },
 });
 
 const User = models.User || model("User", UserSchema);
