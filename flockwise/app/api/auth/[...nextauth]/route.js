@@ -68,6 +68,7 @@ const createEmployeeForUser = async (user, profile) => {
     assignedTasks: [], // an employee wont have any tasks assigned initially
     workSchedule: [], // need to implement
     benefitsManager: [], // empty list for now but possibly have default benefits
+    paystubs: [], // empty list for now but will be populated with paystubs
     accessLevel: 1, // default access level is 1 for employee, 2 = manager, 3 = HR staff
     salary: 7.25 // default salary is minimum wage
   });
