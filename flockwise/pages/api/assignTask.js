@@ -1,3 +1,4 @@
+// assignTask.js API file
 import mongoose from 'mongoose';
 import { connectToDB } from '@utils/database';
 import Employee from '@models/employee';
@@ -27,10 +28,14 @@ export default async function handler(req, res) {
       // Convert the task._id to a string
       const taskId = task._id.toString();
 
-      // Push the taskId to the assignedTasks array
+      // Push the taskId to the assignedTasks array of the employee
       employee.assignedTasks.push({ _id: taskId });
 
+      // Push the employeeId to the assignedEmployees array of the task
+      task.assignedEmployees.push({ _id: employee._id });
+
       await employee.save();
+      await task.save();
 
       // Respond with success
       return res.status(200).json({ success: true, message: 'Task assigned successfully' });
