@@ -17,6 +17,7 @@ const AssignTask = () => {
   };
 
   useEffect(() => {
+    console.log('Session in useEffect:', session);
     fetchEmployees();
     fetchTasks();
     SessionManager.setSession(session);
@@ -69,6 +70,7 @@ const AssignTask = () => {
       const session = await getSession();
 
       const accessLevel = session?.user?.employee?.accessLevel;
+      console.log('Access Level:', accessLevel);
       if (accessLevel >= 2) {
       const response = await fetch('/api/assignTask', {
         method: 'POST',
@@ -83,6 +85,7 @@ const AssignTask = () => {
       }
   
       const responseData = await response.json();
+
       console.log('Task assigned:', responseData);
   
       // Display a success notification
@@ -95,6 +98,7 @@ const AssignTask = () => {
       setSelectedEmployee('');
       setSelectedTask('');
     } else {
+      console.log('Access level not sufficient:', accessLevel);
       setNotification({
         message: 'You do not have the required access to assign a task.',
         isError: true,
@@ -150,10 +154,11 @@ const AssignTask = () => {
         <div style={inputContainerStyles}>
           <label style={labelStyles}>Select Employee:</label>
           <select
-  value={selectedEmployee}
-  onChange={handleEmployeeChange}
-  style={inputStyles}
->
+            data-cy="employee-select"
+            value={selectedEmployee}
+            onChange={handleEmployeeChange}
+            style={inputStyles}
+          >
   <option value="">Select an employee</option>
   {employees.map((employee) => (
     <option key={employee.value} value={employee.value}>
@@ -165,10 +170,11 @@ const AssignTask = () => {
         <div style={inputContainerStyles}>
           <label style={labelStyles}>Select Task:</label>
           <select
-  value={selectedTask}
-  onChange={handleTaskChange}
-  style={inputStyles}
->
+            data-cy="task-select"
+            value={selectedTask}
+            onChange={handleTaskChange}
+            style={inputStyles}
+          >
   <option value="">Select a task</option>
   {tasks.map((task) => (
     <option key={task.value} value={task.value}>
