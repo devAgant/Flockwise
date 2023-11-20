@@ -10,10 +10,11 @@ const BenefitsManager = () => {
   const { data: session } = useSession();
   const [activeComponent, setActiveComponent] = useState<null | string>(null);
 
-  const managerStyles = {
-    textAlign: 'center',
+  const managerStyles: React.CSSProperties = {
+    textAlign: 'center', 
     padding: '20px',
   };
+  
 
   const sectionStyles = {
     margin: '20px 50px',
