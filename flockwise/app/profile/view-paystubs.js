@@ -78,7 +78,7 @@ const ViewPayStubs = () => {
         <ul className="divide-y">
           {paystubs.length === 0 && (
             <div className="text-center">
-              <p className="text-gray-600 mb-4">No paystubs available</p>
+              <p className="text-gray-600 mb-4 no-paystubs">No paystubs available</p>
             </div>
           )}
           {paystubs.map((paystub, index) => {
@@ -92,7 +92,7 @@ const ViewPayStubs = () => {
               <div
                 key={index}
                 onClick={() => handlePaystubSelect(index)}
-                className={`flex justify-between p-2 cursor-pointer relative ${selectedPaystub === index ? 'blue_gradient ' : ''}`}
+                className={`paystub-item flex justify-between p-2 cursor-pointer relative ${selectedPaystub === index ? 'blue_gradient ' : ''}`}
               >
                 <div>
                   <div className="mr-2">
