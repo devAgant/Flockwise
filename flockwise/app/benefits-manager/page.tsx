@@ -10,7 +10,7 @@ const BenefitsManager = () => {
   const { data: session } = useSession();
   const [activeComponent, setActiveComponent] = useState<null | string>(null);
 
-  const managerStyles = {
+  const managerStyles: React.CSSProperties = {
     textAlign: 'center',
     padding: '20px',
   };
