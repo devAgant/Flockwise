@@ -1,14 +1,24 @@
-// created by Isabella Pereira
+// Isabella Pereira
 
-import React,  { useState } from 'react';
+"use client";
+import React,  { useState, useEffect } from 'react';
+import EditReq from '@models/editReq';
+import { useSession } from 'next-auth/react';
+import sessionManager from '@models/sessionManager';
+import NextAuth from 'next-auth/next';
+import { connectToDB } from '@utils/database';
 
 const RequestEdit = () => {
-    const [selectedShift, setSelectedShift] = useState(null);
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        sessionManager.setSession(session);
+    }, [session]);
+
     const [editReq, setEditReq] = useState({
-        newClockInDate: '',
-        newClockInTime: '',
-        newClockOutDate: '',
-        newClockOutTime: '',
+        newClockIn: '',
+        newClockOut: '',
+        employee: '',
         reason: '',
     });
 
@@ -26,8 +36,26 @@ const RequestEdit = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        ///add stuff
-        console.log("New Edit Request:", editReq);
+        /*
+        try{
+            const response = await fetch('/api/editRoute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(EditReq),
+            });
+            if(!response.ok){
+                throw new Error('Network response was not ok');
+            }
+            const responseData = await response.json();
+            console.log('Edit requested:', responseData);
+
+            setEditReq({newClockIn: '', newClockOut: '', reason: ''});   //////// fix 
+        } catch (error) {
+            console.error("Error:", error);
+            //////
+        }*/
     };
     
     const formStyles = {

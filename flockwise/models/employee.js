@@ -2,6 +2,9 @@
 
 import { Schema, model, models } from 'mongoose';
 import Task from './task'; // Import the Task model
+import Shift from './shift';
+import TimeOffReq from './timeOffReq';
+import EditReq from './editReq';
 
 const employeeSchema = new Schema({
   employeeID: {
@@ -17,10 +20,28 @@ const employeeSchema = new Schema({
     type: [Task.schema],
     default: [],
   },
-  // workSchedule: {
-  //   type: Schema.Types.ObjectId, // make another object for work schedule or implement however desired
-  //   ref: 'WorkSchedule',
-  // },
+  workSchedule: {
+    type: [Shift.schema],
+    default: [[new Date("2023-11-29T09:00:00"), new Date("2023-11-29T17:00:00")], 
+      [new Date("2023-11-30T09:00:00"), new Date("2023-11-30T17:00:00")], 
+      [new Date("2023-12-01T09:00:00"), new Date("2023-12-01T17:00:00")]], //still needs to be fixed
+  },
+  editReqs: {
+    type: [EditReq.schema],
+    default: [],
+  },
+  timeOffReqs: {
+    type: [TimeOffReq.schema],
+    default: [],
+  },
+  editReqsToApprove: { //if access > 1
+    type: [EditReq.schema],
+    default: [],
+  },
+  timeOffReqsToApprove: { //if access > 1
+    type: [TimeOffReq.schema],
+    default: [],
+  },
   // benefits: {
   //   type: [Benefits.schema], // make another object for benefits or implement however desired
   //   ref: 'BenefitsManagement',

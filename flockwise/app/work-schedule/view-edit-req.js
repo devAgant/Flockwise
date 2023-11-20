@@ -8,19 +8,15 @@ const ViewEditRequests = () => {
     const editReqs = [
         {
             id: 1, 
-            newClockInDate: "10/30/2023",
-            newClockInTime: "6:30 AM",
-            newClockOutDate: "10/30/2023",
-            newClockOutTime: "1:15 PM",
+            newClockIn: "10/30/2023, 6:30 AM",
+            newClockOut: "10/30/2023, 1:15 PM",
             employee: "Employee 1",
             reason: "Forgot to clock out.",
         },
         {
             id: 2,
-            newClockInDate: "10/31/2023",
-            newClockInTime: "10:52 AM",
-            newClockOutDate: "10/31/2023",
-            newClockOutTime: "4:45 PM",
+            newClockIn: "10/31/2023, 10:52 AM",
+            newClockOut: "10/31/2023, 4:45 PM",
             employee: "Employee 2",
             reason: "Internet was out.",
         },
@@ -90,16 +86,10 @@ const ViewEditRequests = () => {
                                 <b>Employee:</b> {selectedEditReq.employee}
                             </p>
                             <p>
-                                <b>New Clock In Date:</b> {selectedEditReq.newClockInDate}
+                                <b>New Clock In Time:</b> {selectedEditReq.newClockIn}
                             </p>
                             <p>
-                                <b>New Clock In Time:</b> {selectedEditReq.newClockInTime}
-                            </p>
-                            <p>
-                                <b>New Clock Out Date:</b> {selectedEditReq.newClockOutDate}
-                            </p>
-                            <p>
-                                <b>New Clock Out Time:</b> {selectedEditReq.newClockOutTime}
+                                <b>New Clock Out Time:</b> {selectedEditReq.newClockOut}
                             </p>
                             <p>
                                 <b>Reason For Change:</b> {selectedEditReq.reason}
