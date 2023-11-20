@@ -2,6 +2,7 @@
 
 import { Schema, model, models } from 'mongoose';
 import Task from './task'; // Import the Task model
+import Paystub from './paystub'; // Import the Paystub model
 
 const employeeSchema = new Schema({
   employeeID: {
@@ -13,10 +14,12 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
-  assignedTasks: {
-    type: [Task.schema],
-    default: [],
-  },
+  assignedTasks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+    },
+  ],
   // workSchedule: {
   //   type: Schema.Types.ObjectId, // make another object for work schedule or implement however desired
   //   ref: 'WorkSchedule',
@@ -25,6 +28,10 @@ const employeeSchema = new Schema({
   //   type: [Benefits.schema], // make another object for benefits or implement however desired
   //   ref: 'BenefitsManagement',
   // },
+  paystubs: {
+    type: [Paystub.schema],
+    default: [],
+  },
   salary: {
     type: Number,
     default: 7.25,

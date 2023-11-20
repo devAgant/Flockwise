@@ -13,6 +13,7 @@ function VerifyHR() {
   const [employeePromotions, setEmployeePromotions] = useState('');
   const [employeeTransfers, setEmployeeTransfers] = useState('');
 
+  // Test case checking for validation 
   const checkEmployeeCode = () => {
     if (employeeCode === 'H') {
       setIsEmployeeH(true);
@@ -21,15 +22,24 @@ function VerifyHR() {
     }
   };
 
+  // Test case creating the employee 
   const handleCreateEmployee = () => {
-    setCreatedEmployee({
-      name: employeeName,
-      id: employeeID,
-      role: employeeRole,
-      department: employeeDepartment,
-      promotions: employeePromotions,
-      transfers: employeeTransfers,
-    });
+    // Check if the employee ID already exists
+    if (createdEmployee && createdEmployee.id === employeeID) {
+      alert('You are not allowed to use this employee ID.');
+    } else {
+      // If the employee ID is unique, proceed with creating the employee
+      setCreatedEmployee({
+        name: employeeName,
+        id: employeeID,
+        role: employeeRole,
+        department: employeeDepartment,
+        promotions: employeePromotions,
+        transfers: employeeTransfers,
+      });
+      // Adding a success message
+      alert('Employee successfully added!');
+    }
   };
 
   const buttonStyles = {
@@ -150,7 +160,7 @@ function VerifyHR() {
         </div>
       ) : (
         <p style={textStyles}>
-          The user does not have an employee code of "H".
+          The user does not has access this section.
         </p>
       )}
     </div>
