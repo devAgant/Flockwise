@@ -1,8 +1,21 @@
 // created by Isabella Pereira
 
-import React, { useState } from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Task from '@models/task';
+import { useSession } from 'next-auth/react';
+import SessionManager from '@models/sessionManager';
+import NextAuth from 'next-auth/next';
+import { connectToDB } from '@utils/database';
 
 const RequestTimeOff = () => {
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        SessionManager.setSession(session);
+    }, [session]);
+
     const [timeOffReq, setTimeOffReq] = useState({
         begin: '',
         end: '',
@@ -18,8 +31,28 @@ const RequestTimeOff = () => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('New Time Off Request:', timeOffReq);
+        event.preventDefault(); /*
+        try {
+            const response = await fetch('/api/timeOffRoute', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(timeOffReq),
+            });
+      
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+      
+            const responseData = await response.json();
+            console.log('Time off requested:', responseData);
+            // Reset form or handle success (e.g., display success message, navigate to another page)
+            setTask({ start: '', end: '', notes: '' });
+          } catch (error) {
+            console.error('Error:', error);
+            // Handle error (e.g., display error message)
+          /}*.
     };
 
     const formStyles = {
