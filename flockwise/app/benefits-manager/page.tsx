@@ -14,6 +14,7 @@ const BenefitsManager = () => {
     textAlign: 'center',
     padding: '20px',
   };
+  
 
   const sectionStyles = {
     margin: '20px 50px',
