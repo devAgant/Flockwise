@@ -11,7 +11,7 @@ const BenefitsManager = () => {
   const [activeComponent, setActiveComponent] = useState<null | string>(null);
 
   const managerStyles: React.CSSProperties = {
-    textAlign: 'center', 
+    textAlign: 'center',
     padding: '20px',
   };
   

@@ -11,7 +11,6 @@ import EmployeeInfo from './employee-info';
 
 const Profile = () => {
   const { data: session } = useSession();
-  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className="profile p-5 border rounded shadow w-full max-w-2xl mx-auto">
