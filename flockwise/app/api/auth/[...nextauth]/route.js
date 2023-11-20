@@ -5,6 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import Employee from '@models/employee';
 import User from '@models/user';
 import { connectToDB } from '@utils/database';
+import generateSamplePaystubs from '@utils/default-paystubs';
 
 const handler = NextAuth({
   providers: [
@@ -62,15 +63,16 @@ const handler = NextAuth({
 })
 
 const createEmployeeForUser = async (user, profile) => {
+  const employeeID = await generateUniqueEmployeeID();
   const newEmployee = new Employee({
-    employeeID: await generateUniqueEmployeeID(), // need to implement, just need stored max id value and increment
+    employeeID: employeeID,
     name: profile.name,
-    assignedTasks: [], // an employee wont have any tasks assigned initially
-    workSchedule: [], // need to implement
-    benefitsManager: [], // empty list for now but possibly have default benefits
-    paystubs: [], // empty list for now but will be populated with paystubs
-    accessLevel: 1, // default access level is 1 for employee, 2 = manager, 3 = HR staff
-    salary: 7.25 // default salary is minimum wage
+    assignedTasks: [],
+    workSchedule: [],
+    benefitsManager: [],
+    paystubs: generateSamplePaystubs(employeeID), // Generate sample paystubs
+    accessLevel: 1,
+    salary: 7.25,
   });
   await newEmployee.save();
 
