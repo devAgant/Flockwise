@@ -1,9 +1,8 @@
-// Written by Evan
+// Written by Evan Wright
 
 import React from 'react';
 import AssignTask from '../../app/task-manager/assign-task';
-import Provider from '../../components/Provider'; // Adjust the import path based on your project structure
-import Notification from '../../components/notification';
+import Provider from '../../components/Provider';
 import '../../styles/globals.css';
 
 describe('<AssignTask />', () => {

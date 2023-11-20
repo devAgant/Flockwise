@@ -1,4 +1,5 @@
 // Written by Viraaj Veeramachaneni
+
 import React from 'react';
 import ViewBenefits from '../../app/benefits-manager/ViewBenefits';
 import '../../styles/globals.css';

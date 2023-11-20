@@ -1,4 +1,5 @@
-// assignTask.js API file
+// Written by Evan
+
 import mongoose from 'mongoose';
 import { connectToDB } from '@utils/database';
 import Employee from '@models/employee';

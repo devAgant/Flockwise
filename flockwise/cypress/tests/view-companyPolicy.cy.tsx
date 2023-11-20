@@ -1,3 +1,5 @@
+// Written by Viraaj Veeramachaneni
+
 import React from 'react';
 import OnboardingPage from '../../app/onboarding/page';
 
