@@ -13,6 +13,7 @@ function VerifyHR() {
   const [employeePromotions, setEmployeePromotions] = useState('');
   const [employeeTransfers, setEmployeeTransfers] = useState('');
 
+  // Test case checking for validation 
   const checkEmployeeCode = () => {
     if (employeeCode === 'H') {
       setIsEmployeeH(true);
@@ -21,15 +22,24 @@ function VerifyHR() {
     }
   };
 
+  // Test case creating the employee 
   const handleCreateEmployee = () => {
-    setCreatedEmployee({
-      name: employeeName,
-      id: employeeID,
-      role: employeeRole,
-      department: employeeDepartment,
-      promotions: employeePromotions,
-      transfers: employeeTransfers,
-    });
+    // Check if the employee ID already exists
+    if (createdEmployee && createdEmployee.id === employeeID) {
+      alert('You are not allowed to use this employee ID.');
+    } else {
+      // If the employee ID is unique, proceed with creating the employee
+      setCreatedEmployee({
+        name: employeeName,
+        id: employeeID,
+        role: employeeRole,
+        department: employeeDepartment,
+        promotions: employeePromotions,
+        transfers: employeeTransfers,
+      });
+      // Adding a success message
+      alert('Employee successfully added!');
+    }
   };
 
   const buttonStyles = {
@@ -41,10 +51,26 @@ function VerifyHR() {
 
   const containerStyles = {
     textAlign: 'center',
+    margin: '20px',
+    display: 'flex',
+    flexDirection: 'column', 
+    alignItems: 'center', 
+  };
+  
+  const rowContainerStyles = {
+    display: 'flex',
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    margin: '10px 0', 
   };
 
   const textStyles = {
     margin: '10px 0',
+  };
+
+  const inputStyles = {
+    margin: '10px 0', 
+    padding: '5px 10px', 
   };
 
   return (
@@ -55,6 +81,7 @@ function VerifyHR() {
         placeholder="Enter employee code"
         value={employeeCode}
         onChange={(e) => setEmployeeCode(e.target.value)}
+        style={inputStyles}
       />
       <button onClick={checkEmployeeCode} style={buttonStyles}>
         Check
@@ -62,42 +89,52 @@ function VerifyHR() {
 
       {isEmployeeH ? (
         <div>
-          <input
-            type="text"
-            placeholder="Employee Name"
-            value={employeeName}
-            onChange={(e) => setEmployeeName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Employee ID"
-            value={employeeID}
-            onChange={(e) => setEmployeeID(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Employee Role"
-            value={employeeRole}
-            onChange={(e) => setEmployeeRole(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Employee Department"
-            value={employeeDepartment}
-            onChange={(e) => setEmployeeDepartment(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Employee Promotions"
-            value={employeePromotions}
-            onChange={(e) => setEmployeePromotions(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Employee Transfers"
-            value={employeeTransfers}
-            onChange={(e) => setEmployeeTransfers(e.target.value)}
-          />
+          <div style={rowContainerStyles}>
+            <input
+              type="text"
+              placeholder="Employee Name"
+              value={employeeName}
+              onChange={(e) => setEmployeeName(e.target.value)}
+              style={inputStyles}
+            />
+            <input
+              type="text"
+              placeholder="Employee ID"
+              value={employeeID}
+              onChange={(e) => setEmployeeID(e.target.value)}
+              style={inputStyles}
+            />
+            <input
+              type="text"
+              placeholder="Employee Role"
+              value={employeeRole}
+              onChange={(e) => setEmployeeRole(e.target.value)}
+              style={inputStyles}
+            />
+          </div>
+          <div style={rowContainerStyles}>
+            <input
+              type="text"
+              placeholder="Employee Department"
+              value={employeeDepartment}
+              onChange={(e) => setEmployeeDepartment(e.target.value)}
+              style={inputStyles}
+            />
+            <input
+              type="text"
+              placeholder="Employee Promotions"
+              value={employeePromotions}
+              onChange={(e) => setEmployeePromotions(e.target.value)}
+              style={inputStyles}
+            />
+            <input
+              type="text"
+              placeholder="Employee Transfers"
+              value={employeeTransfers}
+              onChange={(e) => setEmployeeTransfers(e.target.value)}
+              style={inputStyles}
+            />
+          </div>
           <button onClick={handleCreateEmployee} style={buttonStyles}>
             Create
           </button>
@@ -123,7 +160,7 @@ function VerifyHR() {
         </div>
       ) : (
         <p style={textStyles}>
-          The user does not have an employee code of "H".
+          The user does not has access this section.
         </p>
       )}
     </div>
