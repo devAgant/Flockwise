@@ -1,6 +1,6 @@
 // Written by Evan
 import React, { useState, useEffect } from 'react';
-import Notification from '@components/Notification';
+import Notification from '@components/notification';
 import { useSession, getSession } from 'next-auth/react';
 import SessionManager from '@models/sessionManager';
 

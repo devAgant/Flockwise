@@ -4,7 +4,7 @@ import React from 'react';
 import CreateTask from '../../app/task-manager/create-task';
 import Provider from '../../components/Provider';
 import '../../styles/globals.css';
-import Notification from '../../components/Notification';
+import Notification from '../../components/notification';
 
 describe('<CreateTask />', () => {
   it('Submits the form and displays a success notification', () => {
