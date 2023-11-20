@@ -9,7 +9,7 @@ import SessionManager from '@models/sessionManager';
 import NextAuth from 'next-auth/next';
 import { connectToDB } from '@utils/database';
 import sessionManager from '@models/sessionManager';
-import Notification from '@components/notification';
+import Notification from '@components/Notification';
 
 const CreateTask = () => {
   const { data: session } = useSession();
