@@ -2,6 +2,9 @@
 
 import { Schema, model, models } from 'mongoose';
 import Task from './task'; // Import the Task model
+import Shift from './shift';
+import TimeOffReq from './timeOffReq';
+import EditReq from './editReq';
 
 const employeeSchema = new Schema({
   employeeID: {

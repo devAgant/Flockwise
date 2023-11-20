@@ -52,7 +52,7 @@ const RequestTimeOff = () => {
           } catch (error) {
             console.error('Error:', error);
             // Handle error (e.g., display error message)
-          /}*.
+          }*/
     };
 
     const formStyles = {
