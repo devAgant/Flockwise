@@ -24,10 +24,12 @@ const TaskSchema = new Schema({
     type: Number,
     default: 1, // hours needed to complete
   },
-  assignedTo: {
-    type: [Number], // array of employeeID's
-    default: [],
-  },
+  assignedEmployees: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Employee', // Make sure this matches the name of your Employee model
+    },
+  ],
 });
 
 let Task;

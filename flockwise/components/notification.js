@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Notification = ({ message, isError, onClose }) => {
   const [visible, setVisible] = useState(true);
 
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setVisible(false);
@@ -13,7 +14,7 @@ const Notification = ({ message, isError, onClose }) => {
   }, [onClose]);
 
   return visible ? (
-    <div style={{ padding: '10px', background: isError ? '#ff8c8c' : '#8cff8c' }}>
+    <div className="notification" style={{ padding: '10px', background: isError ? '#ff8c8c' : '#8cff8c' }}>
       {message}
     </div>
   ) : null;
