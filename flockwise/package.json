@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ci:start-server": "http-server --path ./dist/blog -p 4200",
+    "cy:run": "cypress run-ct --headless --browser chrome",
+    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cy:run",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",

@@ -12,6 +12,9 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.34",
+    "cypress": "^13.5.1",
+    "http-server": "^14.1.1",
+    "start-server-and-test": "^2.0.3",
     "typescript": "^5.2.2"
   }
 }
