@@ -8,7 +8,8 @@
 1. [Introduction](#introduction)
 2. [Required Dependencies](#dependencies)
    1. [Creating a .env File](#env)
-4. [Building The Website](#building)
+3. [Building The Website](#building)
+4. [Using Cypress](#cypress)
 5. [Conclusion](#conclusion)
 
 ## Required Dependencies<a name="dependencies"></a>
@@ -48,5 +49,29 @@ https://nodejs.org/en
 
 `$ npm run build`
 
+## Using Cypress<a name="cypress"></a>
+<p>Cypress is an automatic test case execution framework which is integrated into this project's CI/CD pipeline. In order to use Cypress on your local machine, you will need to first install these dependencies:</p>
+
+`$ npm install --save-dev cypress`
+`$ npm install --save-dev http-server`
+`$ npm install --save-dev start-server-and-test`
+
+<p>You now need to add these scripts at the bottom of the scripts section in the package.json folder inside the lowercase flockwise directory:</p>
+
+```
+"ci:start-server": "http-server --path ./dist/blog -p 4200",
+"cy:run": "cypress run-ct --headless --browser chrome",
+"ci:cy-run": "start-server-and-test ci:start-server http://localhost:4200 cy:run",
+"cypress:open": "cypress open"
+```
+<p>After this, you can execute this command:</p>
+
+`$ npm run cypress:open`
+
+<p>Follow the instructions in the new pop-up to begin using Cypress. This project ONLY uses Component testing, so make sure not to select end-to-end testing. You can find the documentation on how to use Cypress here: https://docs.cypress.io/guides/component-testing/overview</p>
+
+
 ## Conclusion<a name="conclusion"></a>
 <p>If you run into an issue and need any help troubleshooting, feel free to send a message in the Discord. Note that if any other dependencies are added, this documentation will need to be updated for the other members. Please send a heads up in the Discord if you add a new dependency. Good luck!</p>
+
+<p>Documentation written by Arif Nizami</p>
