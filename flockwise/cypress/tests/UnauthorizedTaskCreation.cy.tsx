@@ -1,4 +1,4 @@
-// Written by Evan
+// Written by Evan Wright
 
 import React from 'react';
 import CreateTask from '../../app/task-manager/create-task';
@@ -33,6 +33,14 @@ describe('<CreateTask />', () => {
 
     cy.get('button[type="submit"]').click();
 
+    cy.get('.notification').should('be.visible').invoke('text')
+    .then((notificationText) => {
+      expect(notificationText).to.equal('You do not have the required access to create a task.');
+  
+    });
+    cy.get('.notification').should('not.exist');
+
+    // values should still exist without being submitted and cleared
     cy.get('input[name="title"]').should('have.value', 'Test Task');
     cy.get('input[name="estimatedEffort"]').should('have.value', '5');
     cy.get('select[name="billableStatus"]').should('have.value', 'true');

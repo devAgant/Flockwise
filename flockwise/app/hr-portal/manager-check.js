@@ -1,6 +1,7 @@
 // Worked on by Sai Kotha
 
 import React, { useState } from 'react';
+import Notification from '@components/notification';
 
 function VerifyHR() {
   const [employeeCode, setEmployeeCode] = useState('');
@@ -12,17 +13,27 @@ function VerifyHR() {
   const [employeeDepartment, setEmployeeDepartment] = useState('');
   const [employeePromotions, setEmployeePromotions] = useState('');
   const [employeeTransfers, setEmployeeTransfers] = useState('');
+  const [notification, setNotification] = useState(null);
+
+  const handleCloseNotification = () => {
+    setNotification(null);
+  };
 
   // Test case checking for validation 
   const checkEmployeeCode = () => {
     if (employeeCode === 'H') {
       setIsEmployeeH(true);
+      setNotification(null); // Clear any existing notification
     } else {
       setIsEmployeeH(false);
+      console.log("User has entered the wrong code")
+      setNotification({
+        message: 'The user does not have access to this section.',
+        isError: true,
+      });
     }
   };
 
-  // Test case creating the employee 
   const handleCreateEmployee = () => {
     // Check if the employee ID already exists
     if (createdEmployee && createdEmployee.id === employeeID) {
@@ -159,9 +170,14 @@ function VerifyHR() {
           )}
         </div>
       ) : (
-        <p style={textStyles}>
-          The user does not has access this section.
-        </p>
+        <br></br>
+      )}
+      {notification && (
+        <Notification
+          message={notification.message}
+          isError={notification.isError}
+          onClose={handleCloseNotification}
+        />
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 // Written by Evan
+
 import React, { useState, useEffect } from 'react';
 import { useSession, getSession } from 'next-auth/react';
 
@@ -12,6 +13,7 @@ const ViewTasks = () => {
     const fetchTasks = async () => {
       try {
         const userSession = await getSession();
+        console.log('Session in useEffect:', session); // somehow necessary to re-render the component
         const assignedTasks = userSession?.user?.employee?.assignedTasks || [];
     
         console.log('Assigned tasks:', assignedTasks);

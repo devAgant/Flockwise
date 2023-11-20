@@ -1,5 +1,5 @@
 // Written by Evan
-// pages/api/getEmployees.js
+
 import { connectToDB } from '@utils/database';
 import Employee from '@models/employee';
 

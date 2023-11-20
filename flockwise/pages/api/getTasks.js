@@ -1,4 +1,3 @@
-// pages/api/getTasks.js
 // Written by Evan
 
 import { connectToDB } from '@utils/database';

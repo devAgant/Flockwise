@@ -32,7 +32,5 @@ describe('<VerifyHR />', () => {
     cy.get('input[placeholder="Employee ID"]').type('12345');
     cy.get('input[placeholder="Employee Role"]').type('Supervisor');
     cy.get('button').contains('Create').click();
-
-    // An alert shows up saying you had the same employee code before
   });
 });

@@ -1,4 +1,4 @@
-// Written by Evan
+// Written by Evan Wright
 
 import React from 'react';
 import CreateTask from '../../app/task-manager/create-task';
@@ -39,6 +39,13 @@ describe('<CreateTask />', () => {
     }).as('createTask');
     cy.get('button[type="submit"]').click();
     cy.wait('@createTask');
+
+    cy.get('.notification').should('be.visible').invoke('text')
+    .then((notificationText) => {
+      expect(notificationText).to.equal('Task created successfully!');
+  
+    });
+    cy.get('.notification').should('not.exist');
 
     cy.get('input[name="title"]').should('have.value', '');
     cy.get('input[name="estimatedEffort"]').should('have.value', '');

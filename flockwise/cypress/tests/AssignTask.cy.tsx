@@ -1,4 +1,4 @@
-// Written by Evan
+// Written by Evan Wright
 
 import React from 'react';
 import AssignTask from '../../app/task-manager/assign-task';
@@ -56,6 +56,13 @@ describe('<AssignTask />', () => {
     cy.get('button[type="submit"]').click();
 
     cy.wait('@assignTask');
+
+    cy.get('.notification').should('be.visible').invoke('text')
+    .then((notificationText) => {
+      expect(notificationText).to.equal('Task  assigned to employee  successfully!');
+  
+    });
+    cy.get('.notification').should('not.exist');
 
   });
 });

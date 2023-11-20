@@ -1,4 +1,5 @@
 // Test case written by Arif Nizami
+
 import Provider from '../../components/Provider';
 import Nav from '../../components/Nav';
 import '../../styles/globals.css';

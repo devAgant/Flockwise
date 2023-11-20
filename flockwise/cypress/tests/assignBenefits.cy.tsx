@@ -1,3 +1,5 @@
+// Written by Viraaj Veeramachaneni
+
 import React from 'react';
 import AssignBenefit from '../../app/benefits-manager/AssignBenefit';
 
@@ -14,6 +16,5 @@ describe('<AssignBenefit /> Dropdown Interaction Tests', () => {
     // Select a benefit from the dropdown and verify the selection
     cy.get('select').last().select('Medical').should('have.value', 'task1');
     cy.get('select').last().select('Dental').should('have.value', 'task2');
-    // Add checks for other benefits as needed
   });
 });

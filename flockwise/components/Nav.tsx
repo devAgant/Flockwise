@@ -92,16 +92,6 @@ const Nav = () => {
                   </Link>
                 </li>
               </ul>
-              <ul>
-                <li>
-                  <Link
-                    href="/management-portal"
-                    className='dropdown_link'
-                  >
-                    Management Portal
-                  </Link>
-                </li>
-              </ul>
               <button type="button" onClick={() => {
                 handleSignOut();
 
@@ -205,14 +195,6 @@ const Nav = () => {
                       (false)}
                   >
                     HR Portal
-                  </Link>
-                  <Link
-                    href="/management-portal"
-                    className='dropdown_link'
-                    onClick={() => setToggleDropdown
-                      (false)}
-                  >
-                    Management Portal
                   </Link>
                   <ul>
                     <li>

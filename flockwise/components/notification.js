@@ -1,3 +1,5 @@
+// Written by Evan
+
 import React, { useState, useEffect } from 'react';
 
 const Notification = ({ message, isError, onClose }) => {

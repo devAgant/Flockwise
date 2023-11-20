@@ -1,4 +1,5 @@
-// getUserTask.js API file
+// Written by Evan
+
 import { connectToDB } from '@utils/database';
 import Task from '@models/task';
 
