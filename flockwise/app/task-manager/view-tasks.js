@@ -1,41 +1,45 @@
 // Written by Evan
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSession, getSession } from 'next-auth/react';
 
 const ViewTasks = () => {
+  const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const { data: session } = useSession();
 
-  // mock tasks, full implementation will retrieve values from the database
-  const tasks = [
-    {
-      id: 1,
-      title: 'Task 1',
-      estimatedEffort: '2 hours',
-      dueDate: '2023-11-10',
-      description: 'Description for Task 1',
-    },
-    {
-      id: 2,
-      title: 'Task 2',
-      estimatedEffort: '3 hours',
-      dueDate: '2023-11-15',
-      description: 'Description for Task 2',
-    },
-    {
-      id: 3,
-      title: 'Task 3',
-      estimatedEffort: '16 hours',
-      dueDate: '2023-11-3',
-      description: 'Description for Task 3',
-    },
-    {
-      id: 4,
-      title: 'Task 4',
-      estimatedEffort: '120 hours',
-      dueDate: '2023-11-4',
-      description: 'waaaaaaaaaa',
-    },
-    // more tasks here ...
-  ];
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const userSession = await getSession();
+        const assignedTasks = userSession?.user?.employee?.assignedTasks || [];
+    
+        console.log('Assigned tasks:', assignedTasks);
+    
+        const tasksData = await Promise.all(
+          assignedTasks.map(async (task) => {
+            const response = await fetch(`/api/getUserTask?taskId=${task}`);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+        );
+    
+        const tasks = tasksData.map(data => data.task);
+    
+        setTasks(tasks);
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
+    };
+
+    // Check if the user is authenticated
+    if (session) {
+      fetchTasks();
+    }
+  }, [session]);
+  
 
   const handleTaskClick = (task) => {
     setSelectedTask(task);
@@ -45,34 +49,34 @@ const ViewTasks = () => {
     display: 'flex',
     width: '100%',
   };
-  
+
   const taskListStyles = {
     width: '40%',
     overflowY: 'scroll',
     border: '1px solid #ccc',
     padding: '10px',
     background: '#f2f2f2',
-    margin: '0 10px 0 0', // Add margin to the right
+    margin: '0 10px 0 0',
   };
-  
+
   const taskDetailsStyles = {
     width: '70%',
     padding: '10px',
     textAlign: 'left',
-    margin: '0 0 0 80px', // Add margin to the left to separate the list from the info
+    margin: '0 0 0 80px',
   };
-  
+
   return (
     <div>
       <div style={containerStyles}>
         <div style={taskListStyles}>
           {tasks.map((task) => (
             <div
-              key={task.id}
-              onClick={() => handleTaskClick(task)}
-              style={{ cursor: 'pointer', padding: '5px' }}
-            >
-              {task.title}
+            key={task?._id}
+            onClick={() => handleTaskClick(task)}
+            style={{ cursor: 'pointer', padding: '5px' }}
+          >
+            {task?.title || "Untitled Task"}
             </div>
           ))}
         </div>

@@ -14,10 +14,12 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
-  assignedTasks: {
-    type: [Task.schema],
-    default: [],
-  },
+  assignedTasks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+    },
+  ],
   // workSchedule: {
   //   type: Schema.Types.ObjectId, // make another object for work schedule or implement however desired
   //   ref: 'WorkSchedule',
