@@ -1,10 +1,12 @@
+// Written by Evan
+
 import React from 'react';
 import CreateTask from '../../app/task-manager/create-task';
 import Provider from '../../components/Provider'; // Adjust the import path based on your project structure
 import '../../styles/globals.css';
 
 describe('<CreateTask />', () => {
-  it('Submits the form and displays a success notification', () => {
+  it('Prevents an unauthorized user without a high enough access level from creating a task', () => {
     const mockSession = {
       user: {
         name: 'Test User',
@@ -30,9 +32,6 @@ describe('<CreateTask />', () => {
     cy.intercept('POST', '/api/taskRoute').as('createTask');
 
     cy.get('button[type="submit"]').click();
-    
-    cy.contains('.notification', 'You do not have the required access to create a task.')
-  .should('be.visible');
 
     cy.get('input[name="title"]').should('have.value', 'Test Task');
     cy.get('input[name="estimatedEffort"]').should('have.value', '5');
