@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 const Notification = ({ message, isError, onClose }) => {
   const [visible, setVisible] = useState(true);
 
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setVisible(false);
+      console.log();
       onClose();
     }, 3000); // Set the duration for how long the notification should be visible
 
