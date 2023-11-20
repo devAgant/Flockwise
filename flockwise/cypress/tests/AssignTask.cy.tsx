@@ -28,6 +28,19 @@ describe('<AssignTask />', () => {
     cy.intercept('/api/getEmployees', { statusCode: 200, body: mockEmployees }).as('getEmployees');
     cy.intercept('/api/getTasks', { statusCode: 200, body: { tasks: mockTasks } }).as('getTasks');
     cy.intercept('POST', '/api/assignTask', { statusCode: 200, body: { message: 'Task assigned successfully!' } }).as('assignTask');
+    cy.intercept('GET', '/api/auth/session', { 
+      statusCode: 200, 
+      body: { 
+        user: { 
+          name: 'Test User', 
+          email: 'test@example.com', 
+          employee: { 
+            accessLevel: 3 
+          }
+        }
+      }
+    }).as('getSession');
+
 
     cy.mount(
       <Provider session={mockSession}>
